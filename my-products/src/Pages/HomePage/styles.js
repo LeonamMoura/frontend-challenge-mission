@@ -46,6 +46,7 @@ export const ProductsList = styled.section`
     flex-wrap: wrap;
     align-items: flex-start;
     margin-left: 100px;
+    background-color: tomato;
 `
 
 export const ShoppingCartIcon = styled.span`

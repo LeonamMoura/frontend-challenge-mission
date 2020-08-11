@@ -8,10 +8,12 @@ export default function HomePage() {
   const [products, setProducts] = useState([])
   const [cart, setCart] = useState([])
 
-  const storagedProducts = localStorage.getItem("products")
-  const storagedCart = localStorage.getItem("cart")
+  
 
   useEffect(() => {
+    const storagedProducts = localStorage.getItem("products")
+    const storagedCart = localStorage.getItem("cart")
+
     if (storagedProducts) {
       setProducts(JSON.parse(storagedProducts));
     }
@@ -21,9 +23,24 @@ export default function HomePage() {
   }, [])
 
 
-  const addItemToCart = (product) => {
-    cart.push(product)
-    localStorage.setItem('cart', JSON.stringify(cart))
+  const addItemToCart = (id) => {
+    const productIndex = products.findIndex(p => p.id === id)
+    const findProduct = cart.findIndex(p => p.id === id)
+
+    if (findProduct !== -1) {
+      cart[findProduct].amount += 1
+      setCart([...cart])
+      localStorage.setItem('cart', JSON.stringify(cart))
+      console.log('chegou no if')
+    } else {
+      products[productIndex].amount += 1
+      setCart([...cart, products[productIndex]])
+      localStorage.setItem('cart', JSON.stringify(cart))
+      console.log('chegou no else')
+    }
+
+    console.log(cart)
+
   }
 
   const startModal = (modalID) => {
@@ -54,16 +71,14 @@ export default function HomePage() {
           name={product.name}
           price={product.price}
           photo={product.photo}
-          addToCart={() => addItemToCart(product)}
+          addToCart={() => addItemToCart(product.id)}
         />
       )}
     </ProductsList>
     
     <ShoppingCartIcon onClick={() => startModal('modal-cart')}/>
 
-    <CartPage
-      estado={cart}
-    />
+    <CartPage/>
 
   </HomeContainer>
 }
