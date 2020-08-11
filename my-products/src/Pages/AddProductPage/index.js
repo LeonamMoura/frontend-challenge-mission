@@ -1,13 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { AddProductContainer, Form } from './styles';
 import { Link } from 'react-router-dom';
 
 
-export const arrProducts = []
-
 export default function AddProductPage() {
-  const [nameProductValue, setNameProductValue] = useState()
+  const [products, setProducts] = useState([])
+  const [nameProductValue, setNameProductValue] = useState('')
   const [priceProductValue, setPriceProductValue] = useState()
+  const storage = localStorage.getItem("products");
+
+  useEffect(() => {
+    if (storage) {
+      setProducts(JSON.parse(storage));
+    }
+  }, [])
 
   const onChangeName = (event) => {
     setNameProductValue(event.target.value)
@@ -17,10 +23,10 @@ export default function AddProductPage() {
     setPriceProductValue(event.target.value)
   }
 
-  const addToCart = (name, price) => {
+  const addToProductList = (name, price) => {
 
     try {
-      arrProducts.push(
+      products.push(
         {
           id: Math.random(),
           name: name,
@@ -28,8 +34,10 @@ export default function AddProductPage() {
           photo: 'https://picsum.photos/200/150'
         }
       )
+
+      localStorage.setItem('products', JSON.stringify(products))
+
       alert('Produto adicionado com sucesso!')
-      console.log(arrProducts)
     } catch (error) {
       alert('Houve um problema ao tentar adicionar o produto')
     }
@@ -44,19 +52,21 @@ export default function AddProductPage() {
 
     <Form>
       <input
+        id='name-product'
         placeholder="Digite o nome do produto"
         value={nameProductValue}
         onChange={onChangeName}
       />
 
       <input
+        id='price-product'
         type="number"
         placeholder="Digite o preço do produto"
         value={priceProductValue}
         onChange={onChangePrice}
       />
 
-      <button onClick={() => addToCart(nameProductValue, priceProductValue)}>Adicionar</button>
+      <button onClick={() => addToProductList(nameProductValue, priceProductValue)}>Adicionar</button>
     </Form>
   </AddProductContainer>
 }

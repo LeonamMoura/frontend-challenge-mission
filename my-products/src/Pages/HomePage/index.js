@@ -1,44 +1,69 @@
-import React, {useState} from 'react'
-import {HomeContainer, ProductsList} from './styles'
+import React, { useState, useEffect } from 'react'
+import { HomeContainer, ProductsList, ShoppingCartIcon } from './styles'
 import { Link } from 'react-router-dom'
-import {arrProducts} from '../AddProductPage'
-
-export const cart = []
+import ProductCard from '../../Components/ProductCard'
+import CartPage from '../CartPage'
 
 export default function HomePage() {
-  
-  
+  const [products, setProducts] = useState([])
+  const [cart, setCart] = useState([])
+
+  const storagedProducts = localStorage.getItem("products")
+  const storagedCart = localStorage.getItem("cart")
+
+  useEffect(() => {
+    if (storagedProducts) {
+      setProducts(JSON.parse(storagedProducts));
+    }
+    if (storagedCart) {
+      setCart(JSON.parse(storagedCart));
+    }
+  }, [])
+
+
   const addItemToCart = (product) => {
     cart.push(product)
-    console.log(cart)
+    localStorage.setItem('cart', JSON.stringify(cart))
   }
 
+  const startModal = (modalID) => {
+    const modal = document.getElementById(modalID)
+    modal.classList.add('mostrar')
+    modal.addEventListener('click', (event) => {
+      if (event.target.id == modalID || event.target.className == 'close-modal') {
+        modal.classList.remove('mostrar')
+      }
+    })
+  }
 
+  
   return <HomeContainer>
     <header>
       <Link to="/add-product">
         <a><u>Adicionar novo produto</u></a>
       </Link>
 
-      <input placeholder="Buscar produto por nome"/>
+      <input placeholder="Buscar produto por nome" />
 
-      <Link to="/cart">
-        <a><u>Ver carrinho</u></a>
-      </Link>
+      
     </header>
 
     <ProductsList>
-      {arrProducts.map(product => {
-        return <div id={product.id}>
-          <img src={product.photo}/>
-          <h3>{product.name}</h3>
-          <h5>R$ {product.price}</h5>
-
-          <footer onClick={() => addItemToCart(product)}>
-            Adicionar ao carrinho
-          </footer>
-        </div>
-      })}
+      {products.map(product =>
+        <ProductCard
+          name={product.name}
+          price={product.price}
+          photo={product.photo}
+          addToCart={() => addItemToCart(product)}
+        />
+      )}
     </ProductsList>
+    
+    <ShoppingCartIcon onClick={() => startModal('modal-cart')}/>
+
+    <CartPage
+      estado={cart}
+    />
+
   </HomeContainer>
 }

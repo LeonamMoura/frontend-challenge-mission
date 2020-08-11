@@ -1,31 +1,33 @@
 import styled from 'styled-components'
+import CartIcon from '../../Components/Assets/Icons/shopping-cart.svg'
 
 export const HomeContainer = styled.div`
     width: 100vw;
     min-height: 100vh;
-    background-color: #1d1e1d;
+    background-color: #fff;
     display: flex;
     flex-direction: column;
-    align-items: center;
-
 
     header {
-        width: 100vw;
-        height: 100px;
-        background: #1d1e1d;
+        z-index: 1;
         position: sticky;
         top: 0;
-        border-bottom: solid 1px #05FF2D;
+        width: 100%;
+        height: 80px;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         display: flex;
         justify-content: space-around;
         align-items: center;
 
         input {
             width: 300px;
-            height: 38px;
-            background: transparent;
-            border: solid 1px #05FF2D;
-            color: #05FF2D;
+            height: 40px;
+            background: #F1F5F5;
+            border: 1px solid #A8E7DB;
+            box-sizing: border-box;
+            box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
             padding-left: 16px;
         }
         
@@ -39,42 +41,20 @@ export const HomeContainer = styled.div`
 
 
 export const ProductsList = styled.section`
+    width: 1000px;
     display: flex;
     flex-wrap: wrap;
-    width: 100vw;
-    margin-top: 20px;
-    align-items: center;
-    
+    align-items: flex-start;
+    margin-left: 100px;
+`
 
-    div {
-        width: 200px;
-        height: 300px;
-        border: solid 1px #05FF2D;
-        margin: 20px;
-        color: white;
-        border-radius: 8px;
-        position: relative;
-        transition: 0.5s;
-
-        :hover {
-            transform: scale(1.05)
-        }
-
-        img {
-            border-radius: 8px;
-        }
-
-        footer {
-            position: absolute;
-            bottom: 0;
-
-            width: 100%;
-            background-color: green;
-            text-align: center;
-            cursor: pointer;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-        }
-    }
+export const ShoppingCartIcon = styled.span`
+    position: fixed;
+    right: 5%;
+    bottom: 10%;
+    width: 50px;
+    height: 50px;
+    background-image: url(${CartIcon});
+    cursor: pointer;
 `
 
