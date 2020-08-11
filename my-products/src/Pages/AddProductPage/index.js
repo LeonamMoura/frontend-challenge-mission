@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export const arrProducts = []
 
 export default function AddProductPage() {
-  const [nameProductValue, setNameProductValue] = useState('')
+  const [nameProductValue, setNameProductValue] = useState()
   const [priceProductValue, setPriceProductValue] = useState()
 
   const onChangeName = (event) => {
@@ -29,6 +29,7 @@ export default function AddProductPage() {
         }
       )
       alert('Produto adicionado com sucesso!')
+      console.log(arrProducts)
     } catch (error) {
       alert('Houve um problema ao tentar adicionar o produto')
     }
@@ -43,14 +44,12 @@ export default function AddProductPage() {
 
     <Form>
       <input
-        id='name-product'
         placeholder="Digite o nome do produto"
         value={nameProductValue}
         onChange={onChangeName}
       />
 
       <input
-        id='price-product'
         type="number"
         placeholder="Digite o preço do produto"
         value={priceProductValue}

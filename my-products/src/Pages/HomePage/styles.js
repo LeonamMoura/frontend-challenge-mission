@@ -53,9 +53,27 @@ export const ProductsList = styled.section`
         margin: 20px;
         color: white;
         border-radius: 8px;
+        position: relative;
+        transition: 0.5s;
+
+        :hover {
+            transform: scale(1.05)
+        }
 
         img {
             border-radius: 8px;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+
+            width: 100%;
+            background-color: green;
+            text-align: center;
+            cursor: pointer;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
         }
     }
 `
