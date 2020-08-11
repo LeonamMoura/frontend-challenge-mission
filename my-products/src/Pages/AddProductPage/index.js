@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 export default function AddProductPage() {
   const [products, setProducts] = useState([])
   const [nameProductValue, setNameProductValue] = useState('')
+  const [idProductValue, setIdProductValue] = useState()
   const [priceProductValue, setPriceProductValue] = useState()
   const storage = localStorage.getItem("products");
 
@@ -19,19 +20,24 @@ export default function AddProductPage() {
     setNameProductValue(event.target.value)
   }
 
+  const onChangeId = (event) => {
+    setIdProductValue(event.target.value)
+  }
+
   const onChangePrice = (event) => {
     setPriceProductValue(event.target.value)
   }
 
-  const addToProductList = (name, price) => {
+  const addToProductList = (name, price, id) => {
 
     try {
       products.push(
         {
-          id: Math.random(),
+          id: id,
           name: name,
           price: price,
-          photo: 'https://picsum.photos/200/150'
+          photo: 'https://picsum.photos/200/150',
+          amount: 0
         }
       )
 
@@ -66,7 +72,15 @@ export default function AddProductPage() {
         onChange={onChangePrice}
       />
 
-      <button onClick={() => addToProductList(nameProductValue, priceProductValue)}>Adicionar</button>
+      <input
+        id='price-product'
+        type="number"
+        placeholder="Digite o id do produto"
+        value={idProductValue}
+        onChange={onChangeId}
+      />
+
+      <button onClick={() => addToProductList(nameProductValue, priceProductValue, idProductValue)}>Adicionar</button>
     </Form>
   </AddProductContainer>
 }

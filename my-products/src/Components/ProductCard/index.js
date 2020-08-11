@@ -15,11 +15,14 @@ const CardContainer = styled.div`
     border: solid 1px #A8E7DB;
     border-bottom: none;
 
+    :hover {
+        box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.35);
+    }
+
     
 
     img {
-        object-fit: fill;
-        position: absolute;
+        position: relative;
         top: 0;
         width: 200px;
         height: 150px;
@@ -50,7 +53,7 @@ export default function ProductCard({name, price, photo, addToCart}) {
   return <CardContainer>
       <img src={photo}/>
       <p>{name}</p>
-      <p>{price}</p>
+      <p>R$ {price}</p>
 
       <footer onClick={addToCart}>
           Adicione ao carrinho
