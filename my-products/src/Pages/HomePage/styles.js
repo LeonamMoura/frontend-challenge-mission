@@ -19,21 +19,23 @@ export const HomeContainer = styled.div`
         display: flex;
         justify-content: space-around;
         align-items: center;
-
-        input {
-            width: 300px;
-            height: 40px;
-            background: #F1F5F5;
-            border: 1px solid #A8E7DB;
-            box-sizing: border-box;
-            box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 10px;
-            padding-left: 16px;
-        }
         
         a {
-            color: #05FF2D;
+            color: #000;
             cursor: pointer;
+        }
+
+        img {
+            width: 120px;
+        }
+
+        .add-product {
+            width: 50px;
+        }
+
+        div {
+            display: flex;
+            align-items: center;
         }
     }
    
@@ -46,7 +48,6 @@ export const ProductsList = styled.section`
     flex-wrap: wrap;
     align-items: flex-start;
     margin-left: 100px;
-    background-color: tomato;
 `
 
 export const ShoppingCartIcon = styled.span`

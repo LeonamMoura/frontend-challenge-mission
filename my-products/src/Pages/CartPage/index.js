@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {ModalContainer, Modal, ItemInCart} from './styles.js'
+import {ModalContainer, Modal, ItemInCart, FieldInfoProduct, FieldButtonsOnCart} from './styles.js'
 import {formatPrice} from '../../util/format'
 
 export default function CartPage() {
@@ -13,15 +13,21 @@ export default function CartPage() {
   }, [itemsInCart])
 
   function increment(id) {
-    console.log(id)
     const productIndex = cart.findIndex((p) => p.id === id);
     if (productIndex !== -1) {
       cart[productIndex].amount += 1;
       setCart([...cart]);
       localStorage.setItem("carrinho", JSON.stringify(cart));
     }
+  }
 
-    console.log(cart);
+  function decrement(id) {
+    const productIndex = cart.findIndex((p) => p.id === id);
+    if (productIndex !== -1) {
+      cart[productIndex].amount -= 1;
+      setCart([...cart]);
+      localStorage.setItem("carrinho", JSON.stringify(cart));
+    }
   }
 
   return <ModalContainer id="modal-cart">
@@ -35,11 +41,18 @@ export default function CartPage() {
         return (
           <ItemInCart key={item.id}>
             <img src={item.photo} />
-            <span>{item.name}</span>
-            <span>R${item.price}</span>
-            <button>-</button>
-            <span>{item.amount}</span>
-            <button type="button" onClick={() => increment(item.id)}>+</button>
+            
+
+            <FieldInfoProduct>
+              <p>{item.name}</p>
+              <span><strong>R${item.price}</strong></span>
+            </FieldInfoProduct>
+      
+            <FieldButtonsOnCart>
+              <button onClick={() => decrement(item.id)} className="decrement">-</button>
+              <span><strong>{item.amount}</strong></span>
+              <button onClick={() => increment(item.id)} className="increment">+</button>
+            </FieldButtonsOnCart>
           </ItemInCart>
         )
       })}

@@ -80,7 +80,7 @@ export default function AddProductPage() {
         onChange={onChangeId}
       />
 
-      <button onClick={() => addToProductList(nameProductValue, priceProductValue, idProductValue)}>Adicionar</button>
+      <button onClick={() => addToProductList(nameProductValue, priceProductValue, idProductValue)}><strong>Adicionar</strong></button>
     </Form>
   </AddProductContainer>
 }
