@@ -55,6 +55,9 @@ export const Modal = styled.div`
   }
 
   .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed;
     bottom: 0;
     background-color: #fff;
@@ -62,17 +65,62 @@ export const Modal = styled.div`
     max-width: 600px;
     height: 80px;
     background-color: #A8E7DB;
+    font-size: 1.6rem;
   }
 `
 
 export const ItemInCart = styled.div`
+  position: relative;
   width: 80%;
   height: 100px;
   border: solid 1px #A8E7DB;
   margin-top: 20px;
   box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+
   img {
     width: 30%;
     height: 100%;
+  }
+
+`
+
+export const FieldInfoProduct = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  span {
+    font-size: 1.2rem;
+    color: green;
+  }
+`
+
+export const FieldButtonsOnCart = styled.div`
+  position: absolute;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  button {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    font-size: 28px;
+  }
+
+  .decrement {
+    background-color: #cccf44;
+    color: white;
+  }
+
+  .increment {
+    background-color: #446ecf;
+    color: white;
+  }
+
+  span {
+    font-size: 30px;
+    border: solid 1px black;
   }
 `

@@ -3,6 +3,8 @@ import { HomeContainer, ProductsList, ShoppingCartIcon } from './styles'
 import { Link } from 'react-router-dom'
 import ProductCard from '../../Components/ProductCard'
 import CartPage from '../CartPage'
+import Logo from '../../Components/Assets/Icons/logo.png'
+import AddProductIcon from '../../Components/Assets/Icons/add-product.png'
 
 export default function HomePage() {
   const [products, setProducts] = useState([])
@@ -56,13 +58,14 @@ export default function HomePage() {
   
   return <HomeContainer>
     <header>
+      <img src={Logo}/>
+
       <Link to="/add-product">
-        <a><u>Adicionar novo produto</u></a>
+        <div>
+          <img src={AddProductIcon} className="add-product"/>
+          <span>Cadastrar produto</span>
+        </div>
       </Link>
-
-      <input placeholder="Buscar produto por nome" />
-
-      
     </header>
 
     <ProductsList>
